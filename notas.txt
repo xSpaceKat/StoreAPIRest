@@ -1,0 +1,41 @@
+Claro 👇
+
+🧩 CORS (Cross-Origin Resource Sharing)
+
+Qué es: Es un mecanismo de seguridad del navegador que controla si una página web puede hacer peticiones a un servidor con un dominio diferente (por ejemplo, desde frontend.com a api.com).
+
+Cómo funciona:
+Cuando el navegador detecta una petición “cruzada”, envía primero una solicitud OPTIONS (preflight) al servidor para preguntar si esa acción está permitida.
+El servidor responde con cabeceras como:
+
+Access-Control-Allow-Origin: https://frontend.com
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+
+
+Si todo coincide, el navegador deja pasar la petición.
+
+------------------------------------------------
+
+🔐 JWT (JSON Web Token)
+
+Qué es: Es un token (cadena codificada en base64) que sirve para identificar al usuario de forma segura sin guardar su sesión en el servidor.
+
+Para qué se usa:
+Se usa en autenticación: el servidor genera un JWT al iniciar sesión y el cliente lo envía en cada petición (normalmente en la cabecera Authorization).
+
+Ventajas:
+✅ Sin necesidad de manejar sesiones en el servidor.
+✅ Rápido y escalable (ideal para APIs y microservicios).
+✅ Fácil de usar entre distintos lenguajes o plataformas.
+
+Cómo funciona:
+
+El usuario inicia sesión → el servidor genera un JWT con su información (ej. id, rol).
+
+El cliente guarda el token (en localStorage o cookies).
+
+En cada petición, el cliente manda el token.
+
+El servidor verifica la firma del token → si es válido, permite el acceso.
+
+¿Quieres que te muestre un ejemplo rápido de cómo se usa JWT en una API (por ejemplo en .NET o Node)?
