@@ -1,6 +1,10 @@
 //npm install cors
 import cors from 'cors';
 
+import dotenv from 'dotenv';
+
+dotenv.config({ path: './variables.env' });
+
 // Obtener las URLs permitidas desde el archivo .env
 const allowedOrigins = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : [];
 

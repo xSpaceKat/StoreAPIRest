@@ -50,7 +50,7 @@ app.post('/api/usuario/iniciarsesion', (req, res) => {
 
 
 //Middleware para exponer mis rutas y puedan ser accedidas
-app.use('/api/productos',validateJWT, productorouter);
+app.use('/api/productos', productorouter);
 app.use('/api/ventas', ventarouter);
 
 app.use((req,res,next)=>{
