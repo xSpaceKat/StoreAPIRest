@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Producto</title>
+    <title>Editar / Agregar Productos</title>
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
-    <h1> Proximamente </h1>
+    <h1> Editar / Agregar Productos </h1>
+    <form id="product-form">
+        <input type="text" id="name" placeholder="Nombre">
+        <input type="text" id="price" placeholder="Precio">
+        <input type="number" id="quantity" placeholder="Cantidad">
+        <button id="save-product">Guardar</button>
+    </form>
+
+    <script type="module" src="./scripts/formulario.js"></script>
 </body>
 </html>

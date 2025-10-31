@@ -37,6 +37,22 @@ class ProductoController {
     static async obtenerProductos(req, res, next) {
         try {
 
+            const filtro = req.params.filtro;
+            const productos = await ProductoDAO.obtenerProductosPorNombre(filtro);
+
+            if (!productos) {
+                res.status(200).json([]);
+            }
+
+            res.status(200).json(productos);
+        } catch (error) {
+            next(new AppError('Error al obtener productos', 500))
+        }
+    }
+
+    static async obtenerProductos(req, res, next) {
+        try {
+
             const limit = req.query.limit || 10;
             const productos = await ProductoDAO.obtenerProductos(limit);
 

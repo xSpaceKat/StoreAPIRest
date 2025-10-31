@@ -1,3 +1,5 @@
+import ProductoService from "../modulos/productoservice";
+
 document.addEventListener('DOMContentLoaded', function() {
     const productList = document.getElementById('product-list');
     const searchInput = document.getElementById('search');
@@ -9,12 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Alto de la ventana: " + window.screen.height + "px");
 
     async function getProducts() {
-            let products = await fetch('http://localhost:3000/api/productos');
-            products = await products.json();
-            
-            products.forEach(product => {
-                const productItem = document.createElement('li');
-                productItem.innerHTML = `
+        const products = await ProductoService.getProducts();
+        
+        products.forEach(product => {
+            const productItem = document.createElement('li');
+            productItem.innerHTML = `
                 <p><strong>Nombre: </strong>${product.nombre}</p>
                 <p><strong>Precio: </strong>$${product.precio}</p>
                 <p><strong>Cantidad: </strong>${product.cantidad}</p>
@@ -42,9 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const productId = e.target.getAttribute('data-id');
             if(confirm('¿Estás seguro de que deseas eliminar el producto?')) {
                 try {
-                    await fetch(`http://localhost:3000/api/productos/${productId}`, {
-                        method: 'DELETE'
-                    });
+                    await ProductoService.deleteProduct(productId);
                     e.target.parentElement.remove();
                     alert('Producto eliminado con exito');
                 } catch (error) {
@@ -54,4 +53,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    searchInput.addEventListener('input', async function(e) {
+        productList.innerHTML = '';
+        
+        const filtro = searchInput.value;
+
+        if(filtro === '') {
+            getProducts();
+        } else {
+            let products = await ProductoService.searchProducts(filtro);
+            
+            products.forEach(product => {
+                const productItem = document.createElement('li');
+                productItem.innerHTML = `
+                <p><strong>Nombre: </strong>${product.nombre}</p>
+                <p><strong>Precio: </strong>$${product.precio}</p>
+                <p><strong>Cantidad: </strong>${product.cantidad}</p>
+                <button data-id="${product._id}" class="edit-button">Editar</button>
+                <button data-id="${product._id}" class="delete-button">Eliminar</button>
+                `;
+                productList.appendChild(productItem);
+            });
+        }
+
+});
 });

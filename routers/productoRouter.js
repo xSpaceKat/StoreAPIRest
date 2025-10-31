@@ -7,5 +7,6 @@ router.get('/:id', ProductoController.obtenerProductoPorId);
 router.post('/', ProductoController.crearProducto);
 router.put('/:id', ProductoController.actualizarProducto);
 router.delete('/:id', ProductoController.eliminarProducto);
+router.get('/filtro/:filtro', ProductoController.obtenerProductosPorNombre);
 
 export default router;
